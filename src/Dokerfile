@@ -1,0 +1,14 @@
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:11-jre-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the project files into the container
+COPY . .
+
+# Resolve dependencies and package the application
+RUN ./mvnw clean package -DskipTests
+
+# Run the application
+CMD ["java", "-jar", "target/sandy-1.0-SNAPSHOT.jar"]
